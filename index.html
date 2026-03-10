@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어나무 - 제주 삼화지구 영어교습소</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* ============================================
+   영어나무 랜딩페이지 v2
+   디자인: 화이트 베이스 + 그린/오렌지 + 명조
+   색상 변경: :root 변수만 수정하세요
+   ============================================ */
+:root {
+  --green: #1E9E5E;
+  --green-dark: #166B40;
+  --green-light: #E8F7EF;
+  --orange: #E8621A;
+  --orange-light: #FFF3EC;
+  --navy: #0F1F2E;
+  --gray-dark: #2C3E50;
+  --gray-mid: #7F8C8D;
+  --gray-light: #F8F9FA;
+  --white: #FFFFFF;
+  --border: #E8ECEF;
+
+  /* 폰트 */
+  --serif: 'Noto Serif KR', 'Georgia', serif;
+  --sans: 'Noto Sans KR', sans-serif;
+  --serif-en: 'Cormorant Garamond', serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--navy);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── 공통 ── */
+.container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 24px; }
+.section-label {
+  font-family: var(--serif-en);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--green);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.section-title .hl-green { color: var(--green); }
+.section-title .hl-orange { color: var(--orange); }
+.section-desc {
+  font-size: 15px;
+  color: var(--gray-mid);
+  line-height: 1.9;
+}
+.divider {
+  width: 48px; height: 3px;
+  background: var(--green);
+  margin: 20px 0 32px;
+  border-radius: 2px;
+}
+
+/* ── 상단 바 ── */
+.topbar {
+  position: fixed; top:0; left:0; right:0;
+  z-index: 100;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 60px;
+}
+.topbar-logo {
+  font-family: var(--serif);
+  font-size: 20px; font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.3px;
+}
+.topbar-logo em { color: var(--green); font-style: normal; }
+.topbar-nav { display: flex; gap: 8px; align-items: center; }
+.topbar-cta {
+  background: var(--green); color: var(--white);
+  border: none; border-radius: 6px;
+  padding: 9px 20px; font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: var(--sans);
+  text-decoration: none; transition: background 0.2s;
+  letter-spacing: 0.3px;
+}
+.topbar-cta:hover { background: var(--green-dark); }
+
+/* ── 히어로 — 화이트 클린 ── */
+.hero {
+  min-height: 100vh;
+  background: var(--white);
+  display: flex; align-items: center;
+  padding-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+/* 배경 데코 원 */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30,158,94,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,98,26,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 980px; margin: 0 auto;
+  padding: 80px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+}
+.hero-left { }
+.hero-eyebrow {
+  font-family: var(--serif-en);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 28px; height: 2px;
+  background: var(--orange);
+  border-radius: 1px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--navy);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+.hero-title .line-green { color: var(--green); display: block; }
+.hero-title .line-orange { color: var(--orange); }
+.hero-sub {
+  font-size: 16px;
+  color: var(--gray-dark);
+  line-height: 1.9;
+  margin-bottom: 40px;
+  max-width: 420px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-main {
+  background: var(--green); color: var(--white);
+  padding: 14px 28px; border-radius: 6px;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; display: inline-flex;
+  align-items: center; gap: 8px;
+  transition: all 0.2s; border: none; cursor: pointer;
+  font-family: var(--sans);
+}
+.btn-main:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,158,94,0.25); }
+.btn-ghost {
+  background: transparent; color: var(--navy);
+  padding: 14px 28px; border-radius: 6px;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; display: inline-flex;
+  align-items: center; gap: 8px;
+  border: 1.5px solid var(--border);
+  transition: all 0.2s; font-family: var(--sans);
+}
+.btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+/* 히어로 오른쪽 — 통계 카드들 */
+.hero-right { display: flex; flex-direction: column; gap: 16px; }
+.hero-stat-card {
+  background: var(--gray-light);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-stat-card:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(15,31,46,0.06); }
+.stat-icon { font-size: 28px; flex-shrink: 0; }
+.stat-text .num {
+  font-family: var(--serif-en);
+  font-size: 22px; font-weight: 700;
+  color: var(--green);
+  display: block; line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-text .label { font-size: 13px; color: var(--gray-mid); }
+.hero-badge-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 8px;
+}
+.hero-badge {
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 12px; font-weight: 700;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid rgba(30,158,94,0.2);
+}
+
+/* ── 등록특전 — 흰 배경 + 그린 글씨 ── */
+.promo-section {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 24px;
+}
+.promo-inner {
+  max-width: 980px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+}
+.promo-left { flex: 1; min-width: 260px; }
+.promo-tag {
+  font-family: var(--serif-en);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 3px; color: var(--orange);
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.promo-title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.4; margin-bottom: 12px;
+}
+.promo-title span { color: var(--green); }
+.promo-desc { font-size: 14px; color: var(--gray-mid); line-height: 1.8; }
+.promo-right { display: flex; gap: 16px; flex-wrap: wrap; }
+.promo-card {
+  background: var(--green-light);
+  border: 2px solid rgba(30,158,94,0.2);
+  border-radius: 16px; padding: 24px 28px;
+  text-align: center; min-width: 150px;
+}
+.promo-card .p-num {
+  font-family: var(--serif-en);
+  font-size: 32px; font-weight: 700;
+  color: var(--green); display: block; line-height: 1;
+}
+.promo-card .p-label { font-size: 12px; font-weight: 700; color: var(--green-dark); margin-top: 6px; display: block; }
+.promo-card-orange {
+  background: var(--orange-light);
+  border-color: rgba(232,98,26,0.2);
+}
+.promo-card-orange .p-num { color: var(--orange); }
+.promo-card-orange .p-label { color: var(--orange); }
+
+/* ── QR 이벤트 배너 ── */
+.event-section {
+  background: var(--navy);
+  padding: 56px 24px;
+}
+.event-inner {
+  max-width: 980px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 32px; flex-wrap: wrap;
+}
+.event-left { flex: 1; min-width: 260px; }
+.event-tag {
+  font-family: var(--serif-en);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 3px; color: var(--orange);
+  text-transform: uppercase; margin-bottom: 16px; display: block;
+}
+.event-title {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700; color: var(--white);
+  line-height: 1.5; margin-bottom: 12px;
+}
+.event-title strong { color: #FFB84D; }
+.event-desc { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+.event-card {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 28px 32px; text-align: center; min-width: 200px;
+}
+.event-card .ev-icon { font-size: 36px; margin-bottom: 12px; }
+.event-card .ev-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.event-card .ev-highlight {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 700; color: #FFB84D;
+}
+.event-card .ev-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+
+/* ── 왜 영어나무? ── */
+.why-section { background: var(--gray-light); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px; margin-top: 48px;
+}
+.why-card {
+  background: var(--white);
+  border-radius: 12px; padding: 32px 24px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.why-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(15,31,46,0.08); }
+.why-card-num {
+  font-family: var(--serif-en);
+  font-size: 48px; font-weight: 700;
+  color: var(--green-light);
+  position: absolute; top: 16px; right: 20px;
+  line-height: 1; pointer-events: none;
+}
+.why-card h3 { font-family: var(--serif); font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+.why-card p { font-size: 13px; color: var(--gray-mid); line-height: 1.8; }
+
+/* ── 커리큘럼 ── */
+.curriculum-section { background: var(--white); }
+.tab-row { display: flex; gap: 0; margin: 40px 0 32px; border-bottom: 2px solid var(--border); }
+.tab-btn {
+  padding: 12px 24px; font-size: 14px; font-weight: 600;
+  cursor: pointer; background: transparent; border: none;
+  color: var(--gray-mid); font-family: var(--sans);
+  border-bottom: 3px solid transparent; margin-bottom: -2px;
+  transition: all 0.2s;
+}
+.tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+.tab-btn:hover { color: var(--green); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.steps-list { display: flex; flex-direction: column; gap: 0; }
+.step-row {
+  display: flex; align-items: flex-start; gap: 24px;
+  padding: 24px 0; border-bottom: 1px solid var(--border);
+}
+.step-row:last-child { border-bottom: none; }
+.step-num-badge {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: var(--green-light);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif-en); font-size: 14px; font-weight: 700; color: var(--green);
+}
+.step-content h4 { font-family: var(--serif); font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.step-content p { font-size: 13px; color: var(--gray-mid); line-height: 1.7; }
+.adult-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.adult-card {
+  background: var(--gray-light); border-radius: 12px; padding: 24px;
+  border: 1px solid var(--border); transition: transform 0.2s;
+}
+.adult-card:hover { transform: translateY(-2px); }
+.adult-card .icon { font-size: 28px; margin-bottom: 12px; }
+.adult-card h4 { font-family: var(--serif); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.adult-card p { font-size: 13px; color: var(--gray-mid); line-height: 1.7; }
+
+/* ── 원장 소개 ── */
+.principal-section { background: var(--gray-light); }
+.principal-inner {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 60px; align-items: center;
+}
+.principal-photo-wrap { text-align: center; }
+.principal-photo {
+  width: 220px; height: 220px; border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--white);
+  box-shadow: 0 8px 40px rgba(15,31,46,0.12);
+  margin-bottom: 16px;
+}
+.principal-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.principal-name-badge {
+  background: var(--green); color: var(--white);
+  font-size: 13px; font-weight: 700;
+  padding: 6px 18px; border-radius: 20px;
+  display: inline-block;
+}
+.principal-info { }
+.principal-info h3 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 32px); font-weight: 700;
+  color: var(--navy); margin-bottom: 4px;
+}
+.principal-info .subtitle { color: var(--green); font-size: 14px; font-weight: 600; margin-bottom: 24px; }
+.principal-quote {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-weight: 600; line-height: 1.7;
+  color: var(--navy);
+  border-left: 3px solid var(--orange);
+  padding-left: 20px;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.principal-desc { font-size: 14px; color: var(--gray-dark); line-height: 1.9; }
+
+/* ── 후기 ── */
+.reviews-section { background: var(--white); }
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px; margin-top: 48px;
+}
+.review-card {
+  background: var(--gray-light); border-radius: 12px;
+  padding: 28px; border: 1px solid var(--border);
+  position: relative;
+}
+.review-quote {
+  font-family: var(--serif-en);
+  font-size: 56px; color: var(--green-light);
+  line-height: 1; position: absolute;
+  top: 16px; right: 20px; font-weight: 700;
+}
+.stars { color: #F5A623; font-size: 13px; margin-bottom: 12px; }
+.review-card p { font-size: 14px; color: var(--gray-dark); line-height: 1.9; margin-bottom: 16px; }
+.reviewer { font-size: 13px; font-weight: 700; color: var(--navy); }
+.reviewer span { color: var(--gray-mid); font-weight: 400; font-size: 12px; }
+
+/* ── 오시는 길 ── */
+.map-section { background: var(--gray-light); }
+.map-wrapper { margin-top: 40px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(15,31,46,0.08); border: 1px solid var(--border); }
+.map-wrapper iframe { display:block; width:100%; height:380px; border:none; }
+.map-detail { background: var(--white); padding: 28px 32px; }
+.map-address {
+  font-family: var(--serif);
+  font-size: 16px; font-weight: 700;
+  color: var(--navy); margin-bottom: 20px;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.map-address .icon { color: var(--green); flex-shrink: 0; }
+.map-directions { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+.dir-item strong { font-size: 12px; color: var(--green); letter-spacing: 1px; display: block; margin-bottom: 6px; font-weight: 700; }
+.dir-item p { font-size: 13px; color: var(--gray-mid); line-height: 1.7; }
+.map-contacts { display: flex; gap: 20px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--border); }
+.map-contact { font-size: 14px; color: var(--gray-mid); display: flex; align-items: center; gap: 6px; }
+.map-contact a { color: var(--green); text-decoration: none; font-weight: 700; }
+
+/* ── 상담 CTA ── */
+.contact-section { background: var(--white); border-top: 1px solid var(--border); padding: 96px 24px; }
+.contact-buttons { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 48px 0; }
+.contact-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 22px 28px; border-radius: 12px; text-decoration: none;
+  transition: all 0.2s; min-width: 130px; font-family: var(--sans);
+  border: 1.5px solid var(--border); cursor: pointer;
+  background: var(--white);
+}
+.contact-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,31,46,0.1); border-color: var(--green); }
+.contact-btn .cb-icon { font-size: 26px; }
+.contact-btn .cb-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.contact-btn .cb-sub { font-size: 11px; color: var(--gray-mid); }
+.cb-kakao { background: #FEF9E7; border-color: #F5C518; }
+.cb-kakao:hover { border-color: #F5C518; box-shadow: 0 8px 24px rgba(245,197,24,0.2); }
+.cb-call { background: var(--green-light); border-color: rgba(30,158,94,0.3); }
+.cb-call:hover { border-color: var(--green); box-shadow: 0 8px 24px rgba(30,158,94,0.15); }
+
+/* ── QR 섹션 ── */
+.qr-wrap {
+  max-width: 480px; margin: 0 auto;
+  text-align: center;
+  padding: 40px; background: var(--gray-light);
+  border-radius: 20px; border: 1px solid var(--border);
+}
+.qr-title { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.qr-event-badge {
+  display: inline-block;
+  background: var(--orange-light); color: var(--orange);
+  font-size: 13px; font-weight: 700;
+  padding: 6px 18px; border-radius: 20px;
+  border: 1px solid rgba(232,98,26,0.2);
+  margin-bottom: 24px;
+}
+.qr-box {
+  display: inline-block; background: var(--white);
+  padding: 20px; border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(15,31,46,0.1);
+  margin-bottom: 20px;
+}
+.qr-save-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green); color: var(--white);
+  border: none; border-radius: 6px;
+  padding: 12px 24px; font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: var(--sans);
+  transition: all 0.2s; text-decoration: none;
+}
+.qr-save-btn:hover { background: var(--green-dark); }
+.qr-note { font-size: 11px; color: var(--gray-mid); margin-top: 12px; line-height: 1.6; }
+
+/* ── 푸터 ── */
+footer {
+  background: var(--navy); padding: 40px 24px;
+  text-align: center; color: rgba(255,255,255,0.35);
+  font-size: 12px; line-height: 2;
+}
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+footer a:hover { color: var(--green); }
+
+/* ── 모바일 플로팅 바 ── */
+.float-bar { display:none; position:fixed; bottom:0; left:0; right:0; z-index:200; background:var(--white); box-shadow:0 -2px 16px rgba(15,31,46,0.1); padding:12px 16px; gap:10px; border-top:1px solid var(--border); }
+.float-bar a { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:12px 8px; border-radius:8px; font-size:13px; font-weight:700; text-decoration:none; }
+.float-call { background:var(--green); color:var(--white); }
+.float-sms { background:var(--navy); color:var(--white); }
+.float-kakao { background:#FEE500; color:#3C1E1E; }
+
+@media (max-width: 720px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-right { display: none; }
+  .hero-badge-row { display: flex; }
+  .principal-inner { grid-template-columns: 1fr; text-align: center; }
+  .principal-quote { text-align: left; }
+  .float-bar { display: flex; }
+  body { padding-bottom: 72px; }
+  .map-directions { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .section { padding: 64px 16px; }
+  .contact-btn { min-width: 100px; padding: 16px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     수정 데이터 영역 — 여기만 고치면 됩니다!
+     ============================================= -->
+<script>
+const DATA = {
+  phone: "010-3696-7671",
+  kakaoUrl: "#",          // 카카오 오픈채팅 URL 생기면 교체
+  blogUrl: "https://blog.naver.com/englishnamu77",
+  qrUrl: "https://blog.naver.com/englishnamu77",  // 사이트 주소 확정 후 교체
+  address: "제주 제주시 동화로1길 10 화북주공4단지 415동 104호",
+  reviews: [
+    { text: "아이가 영어를 공부가 아닌 놀이처럼 느껴요. 리딩앤으로 집에서도 책을 스스로 찾아 읽더라고요.", name: "김○○ 어머니", sub: "초등 1학년", stars: 5 },
+    { text: "파닉스부터 체계적으로 잡아주셔서 발음이 확연히 좋아졌어요. 선생님이 꼼꼼하게 관리해주세요.", name: "박○○ 어머니", sub: "초등 2학년", stars: 5 },
+    { text: "엄마 너무 재밌어! 하면서 먼저 공부하러 가자고 해요. 이런 학원은 처음이에요.", name: "이○○ 어머니", sub: "초등 1학년", stars: 5 }
+  ]
+};
+</script>
+
+<!-- 상단 바 -->
+<header class="topbar">
+  <div class="topbar-logo">영어<em>나무</em></div>
+  <a href="tel:010-3696-7671" class="topbar-cta">무료 상담</a>
+</header>
+
+<!-- ① 히어로 -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Jeju Samhwa · English School</div>
+      <h1 class="hero-title">
+        영어가<br>
+        <span class="line-green">즐거워지는</span><br>
+        곳, 영어나무
+      </h1>
+      <p class="hero-sub">
+        지금은 성적보다, 영어를 좋아하게 만드는 게 더 중요합니다.<br>
+        초등 저학년부터 직장인까지 — 체계적인 프로그램으로<br>진짜 실력을 키워드립니다.
+      </p>
+      <div class="hero-badge-row">
+        <span class="hero-badge">제주 삼화지구</span>
+        <span class="hero-badge">초등 저학년반</span>
+        <span class="hero-badge">직장인 회화반</span>
+      </div>
+      <br>
+      <div class="hero-btns">
+        <a href="tel:010-3696-7671" class="btn-main">📞 지금 상담하기</a>
+        <a href="https://blog.naver.com/englishnamu77" target="_blank" class="btn-ghost">블로그 보기 →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-card"><span class="stat-icon">📚</span><div class="stat-text"><span class="num">5-Step</span><span class="label">리딩앤 체계 학습 프로그램</span></div></div>
+      <div class="hero-stat-card"><span class="stat-icon">🎁</span><div class="stat-text"><span class="num">월 3만원</span><span class="label">등록 특전 — 콘텐츠 이용료 면제</span></div></div>
+      <div class="hero-stat-card"><span class="stat-icon">🤝</span><div class="stat-text"><span class="num">1:1 관리</span><span class="label">선생님의 꼼꼼한 개인 맞춤 지도</span></div></div>
+      <div class="hero-stat-card"><span class="stat-icon">💼</span><div class="stat-text"><span class="num">직장인반</span><span class="label">일상 영어회화 · 유연한 스케줄</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 등록특전 — 흰 배경 + 그린 글씨 -->
+<div class="promo-section">
+  <div class="promo-inner">
+    <div class="promo-left">
+      <div class="promo-tag">Special Offer</div>
+      <h2 class="promo-title">지금 등록하시면<br><span>리딩앤 이용료 전액 무료!</span></h2>
+      <p class="promo-desc">PC · 태블릿 · 핸드폰 어디서든, 언제나<br>영어원서를 읽을 수 있는 리딩앤 프로그램을<br>등록 기간 내내 무료로 제공해드립니다.</p>
+    </div>
+    <div class="promo-right">
+      <div class="promo-card">
+        <span class="p-num">FREE</span>
+        <span class="p-label">콘텐츠 이용료 면제</span>
+      </div>
+      <div class="promo-card promo-card-orange">
+        <span class="p-num">₩30,000</span>
+        <span class="p-label">매달 절약</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ QR 이벤트 배너 -->
+<div class="event-section">
+  <div class="event-inner">
+    <div class="event-left">
+      <span class="event-tag">Limited Event</span>
+      <h2 class="event-title">QR코드 보여주시면<br><strong>1개월 할인 혜택!</strong></h2>
+      <p class="event-desc">6개월 등록 시 상담에서 QR코드를 보여주시면<br>1개월 할인 혜택을 추가로 드립니다.<br>아래에서 QR코드를 저장해두세요.</p>
+    </div>
+    <div class="event-card">
+      <div class="ev-icon">📱</div>
+      <div class="ev-label">6개월 등록 + QR 제시</div>
+      <div class="ev-highlight">1개월 할인!</div>
+      <div class="ev-sub">상담 시 QR코드 화면 제시</div>
+    </div>
+  </div>
+</div>
+
+<!-- ④ 왜 영어나무? -->
+<section class="section why-section">
+  <div class="container">
+    <span class="section-label">Why 영어나무</span>
+    <h2 class="section-title">삼화지구 영어교습소,<br>영어나무가 <span class="hl-green">다른 이유</span></h2>
+    <div class="divider"></div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-card-num">01</div><h3>5단계 리딩 시스템</h3><p>듣기→읽기→말하기→쓰기를 자연스럽게 연결. 리딩앤으로 4영역을 동시에 잡습니다.</p></div>
+      <div class="why-card"><div class="why-card-num">02</div><h3>영어를 좋아하게 만드는 수업</h3><p>"이거 알아!"라고 말하는 아이로. 흥미와 자신감을 먼저 키워드립니다.</p></div>
+      <div class="why-card"><div class="why-card-num">03</div><h3>꼼꼼한 1:1 관리</h3><p>어떤 책을 읽었는지, 어떤 활동을 했는지 선생님이 꼼꼼히 챙겨드립니다.</p></div>
+      <div class="why-card"><div class="why-card-num">04</div><h3>집에서도 이어지는 학습</h3><p>PC·태블릿·핸드폰으로 언제 어디서나 영어원서를 읽을 수 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 커리큘럼 -->
+<section class="section curriculum-section">
+  <div class="container">
+    <span class="section-label">Curriculum</span>
+    <h2 class="section-title">지치지 않는 영어습관,<br>영어나무 <span class="hl-green">커리큘럼</span></h2>
+    <div class="divider"></div>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab(this,'kids')">🌿 초등 저학년반</button>
+      <button class="tab-btn" onclick="switchTab(this,'adult')">💼 직장인 회화반</button>
+    </div>
+    <div id="tab-kids" class="tab-panel active">
+      <div class="steps-list">
+        <div class="step-row"><div class="step-num-badge">01</div><div class="step-content"><h4>파닉스 + 발음기호 특강</h4><p>체계적인 발음 교정으로 읽기의 기초를 탄탄하게 잡습니다.</p></div></div>
+        <div class="step-row"><div class="step-num-badge">02</div><div class="step-content"><h4>흘려듣기 · 집중듣기</h4><p>영국/미국 발음을 선택해 풍부한 듣기 Input을 만들어 드립니다.</p></div></div>
+        <div class="step-row"><div class="step-num-badge">03</div><div class="step-content"><h4>본격적인 책 읽기</h4><p>단어 찾기, 영영사전, AI 발음 분석을 활용한 효과적인 독서 학습.</p></div></div>
+        <div class="step-row"><div class="step-num-badge">04</div><div class="step-content"><h4>영어 받아쓰기</h4><p>초등생 필수! 정확한 쓰기 훈련으로 실력을 완성합니다.</p></div></div>
+        <div class="step-row"><div class="step-num-badge">05</div><div class="step-content"><h4>게임으로 마무리</h4><p>단어 퀴즈와 독후활동을 재미있는 게임 형태로 즐겁게 복습합니다.</p></div></div>
+      </div>
+    </div>
+    <div id="tab-adult" class="tab-panel">
+      <div class="adult-grid">
+        <div class="adult-card"><div class="icon">🗣️</div><h4>일상 영어 회화</h4><p>직장·여행·일상에서 바로 쓸 수 있는 살아있는 표현 중심</p></div>
+        <div class="adult-card"><div class="icon">👂</div><h4>듣기 + 말하기 집중</h4><p>원어민 발음에 익숙해지고 자연스러운 대화 흐름 만들기</p></div>
+        <div class="adult-card"><div class="icon">📖</div><h4>영어원서 읽기</h4><p>리딩앤으로 어휘력과 독해력을 동시에 향상</p></div>
+        <div class="adult-card"><div class="icon">⏰</div><h4>유연한 수업 일정</h4><p>직장인 스케줄에 맞춘 탄력적 운영</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 원장 소개 -->
+<section class="section principal-section">
+  <div class="container">
+    <span class="section-label">Principal</span>
+    <div class="principal-inner">
+      <div class="principal-photo-wrap">
+        <div class="principal-photo">          <img src="data:image/jpeg;base64,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" alt="이진석 원장">        </div>
+        <span class="principal-name-badge">이진석 원장</span>
+      </div>
+      <div class="principal-info">
+        <h3>이진석 원장</h3>
+        <div class="subtitle">영어나무 영어교습소</div>
+        <blockquote class="principal-quote">
+          "지금은 성적보다,<br>영어를 좋아하게 만드는 게<br>더 중요합니다."
+        </blockquote>
+        <p class="principal-desc">
+          알파벳·문제집부터 시작하면 아이는 영어를 어려워합니다.<br>
+          영어나무는 먼저 '듣고 읽는 귀'를 만들어주는 방식으로<br>
+          아이가 영어를 좋아하게 되는 변화를 만들어드립니다.<br><br>
+          무작정 외우고 쓰는 수업이 아닌,<br>
+          최적의 성장 경로를 찾아주는 맞춤 지도를 약속드립니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ 학부모 후기 -->
+<section class="section reviews-section">
+  <div class="container">
+    <span class="section-label">Reviews</span>
+    <h2 class="section-title">학부모님 <span class="hl-green">후기</span></h2>
+    <div class="divider"></div>
+    <div class="reviews-grid" id="reviews-grid"></div>
+  </div>
+</section>
+
+<!-- ⑧ 오시는 길 -->
+<section class="section map-section">
+  <div class="container">
+    <span class="section-label">Location</span>
+    <h2 class="section-title">오시는 길</h2>
+    <div class="divider"></div>
+    <div class="map-wrapper">
+      <iframe src="https://maps.google.com/maps?q=제주+제주시+동화로1길+10+화북주공4단지&output=embed&z=16" allowfullscreen loading="lazy"></iframe>
+      <div class="map-detail">
+        <div class="map-address"><span class="icon">📍</span><span>제주 제주시 동화로1길 10 화북주공4단지 415동 104호</span></div>
+        <div class="map-directions">
+          <div class="dir-item"><strong>🚗 자차</strong><p>화북4단지 416동 앞 주차 후<br>416동 통과 → 415동 104호</p></div>
+          <div class="dir-item"><strong>🚶 도보</strong><p>화북119센터 맞은편 진입<br>일방통행로 따라 416동 → 415동 104호</p></div>
+          <div class="dir-item"><strong>🚌 버스</strong><p>'화북주공아파트입구' 정류장 하차<br>416동 뒤쪽으로 이동</p></div>
+        </div>
+        <div class="map-contacts">
+          <div class="map-contact">📞 <a href="tel:010-3696-7671">010-3696-7671</a></div>
+          <div class="map-contact">📝 <a href="https://blog.naver.com/englishnamu77" target="_blank">네이버 블로그</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ 상담 CTA + QR -->
+<section class="contact-section">
+  <div class="container" style="text-align:center">
+    <span class="section-label">Contact</span>
+    <h2 class="section-title">지금 바로 <span class="hl-green">상담하세요</span></h2>
+    <p class="section-desc">궁금한 점은 편하신 방법으로 연락 주세요. 친절하게 안내드리겠습니다.</p>
+    <div class="contact-buttons">
+      <a href="#" class="contact-btn cb-kakao" id="kakao-btn">
+        <span class="cb-icon">💬</span>
+        <span class="cb-label">카카오 채팅</span>
+        <span class="cb-sub">준비중</span>
+      </a>
+      <a href="sms:010-3696-7671" class="contact-btn">
+        <span class="cb-icon">✉️</span>
+        <span class="cb-label">문자 보내기</span>
+        <span class="cb-sub">010-3696-7671</span>
+      </a>
+      <a href="tel:010-3696-7671" class="contact-btn cb-call">
+        <span class="cb-icon">📞</span>
+        <span class="cb-label">전화 상담</span>
+        <span class="cb-sub">010-3696-7671</span>
+      </a>
+      <a href="https://blog.naver.com/englishnamu77" target="_blank" class="contact-btn">
+        <span class="cb-icon">📝</span>
+        <span class="cb-label">블로그</span>
+        <span class="cb-sub">네이버 블로그</span>
+      </a>
+    </div>
+
+    <!-- QR 코드 -->
+    <div class="qr-wrap">
+      <div class="qr-title">📱 QR코드 저장하고 혜택 받으세요</div>
+      <div class="qr-event-badge">🎁 QR 제시 시 — 6개월 등록 1개월 할인!</div>
+      <div class="qr-box"><div id="qrcode"></div></div>
+      <br>
+      <button class="qr-save-btn" onclick="saveQR()">⬇️ QR코드 저장하기</button>
+      <p class="qr-note">사이트 주소 확정 후 DATA.qrUrl 값만 교체하면<br>QR코드가 자동으로 업데이트됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>영어나무 영어교습소 · 이진석 원장</p>
+  <p>제주 제주시 동화로1길 10 화북주공4단지 415동 104호</p>
+  <p>
+    <a href="tel:010-3696-7671">010-3696-7671</a> &nbsp;·&nbsp;
+    <a href="sms:010-3696-7671">문자</a> &nbsp;·&nbsp;
+    <a href="https://blog.naver.com/englishnamu77" target="_blank">블로그</a>
+  </p>
+  <p style="margin-top:8px">© 2025 영어나무. All rights reserved.</p>
+</footer>
+
+<div class="float-bar">
+  <a href="tel:010-3696-7671" class="float-call">📞 전화</a>
+  <a href="sms:010-3696-7671" class="float-sms">✉️ 문자</a>
+  <a href="#" class="float-kakao" id="float-kakao">💬 카카오</a>
+</div>
+
+<script>
+function renderReviews() {
+  var grid = document.getElementById('reviews-grid');
+  DATA.reviews.forEach(function(r) {
+    var stars = '★'.repeat(r.stars);
+    grid.innerHTML += '<div class="review-card"><div class="review-quote">“</div><div class="stars">' + stars + '</div><p>' + r.text + '</p><div class="reviewer">' + r.name + ' <span>· ' + r.sub + '</span></div></div>';
+  });
+}
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+function setKakaoLinks() {
+  if (DATA.kakaoUrl !== '#') {
+    document.getElementById('kakao-btn').href = DATA.kakaoUrl;
+    document.getElementById('float-kakao').href = DATA.kakaoUrl;
+    document.querySelector('#kakao-btn .cb-sub').textContent = '바로 채팅하기';
+  }
+}
+function generateQR() {
+  new QRCode(document.getElementById('qrcode'), {
+    text: DATA.qrUrl,
+    width: 180, height: 180,
+    colorDark: '#0F1F2E',
+    colorLight: '#FFFFFF',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+function saveQR() {
+  setTimeout(function() {
+    var canvas = document.querySelector('#qrcode canvas');
+    if (!canvas) { alert('잠시 후 다시 시도해주세요.'); return; }
+    var link = document.createElement('a');
+    link.download = '영어나무-QR코드.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }, 100);
+}
+renderReviews();
+setKakaoLinks();
+generateQR();
+</script>
+</body>
+</html>
